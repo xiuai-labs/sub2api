@@ -1,0 +1,19 @@
+# Upstream files this fork edits. One line per path, `#` starts a comment.
+#
+# The gate (check-touchpoints.sh) reads this in BOTH directions: an undeclared edit fails,
+# and so does a declared-but-unmodified entry. Declare a file when the change lands, never
+# before — an entry with no diff behind it is a standing permission nobody reviewed.
+#
+# Every entry here is merge risk we pay for on each upstream rebase, so the list should
+# shrink, not grow. Each one needs a row in PATCHES.md saying why it cannot live in xiu/.
+
+# 新增文件，刻意放在仓库根 —— 补丁台账要让人在读任何代码之前先看见。
+PATCHES.md
+
+# ── prompt cache: 不再剥离客户端 system 上的 cache_control（上游 PR #6943）──────
+# 三处调用点 + 那个真正执行删除的函数，都在上游文件里：Go 的包布局不允许把
+# GatewayService 的方法搬进 xiu/。补丁本身是净删除，合并后这四行就该消失。
+backend/internal/service/gateway_claude_oauth_body.go
+backend/internal/service/gateway_count_tokens.go
+backend/internal/service/gateway_forward.go
+backend/internal/service/gateway_system_cache_control_test.go
