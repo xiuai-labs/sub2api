@@ -1,100 +1,106 @@
 package admin
 
 import (
+	"context"
+	"fmt"
 	"strconv"
 	"time"
 
 	"github.com/Wei-Shaw/sub2api/internal/pkg/response"
 	"github.com/Wei-Shaw/sub2api/internal/service"
 	"github.com/gin-gonic/gin"
+	"golang.org/x/sync/singleflight"
 )
 
-// 🔴 TTL 比上游那几张快照缓存（30 秒）长一个量级，判据是这条查询的代价与这个数的变速：
-// 全历史 SUM 每个号都要顺着 idx(account_id, created_at) 扫到底，比「今日」贵得多；
-// 而「这号一共烧了多少」半小时不变也改变不了任何决定。
-// 调用方（xiu-pool 的 sub2api 页）每 30 秒对账一次，没有这一层的话等于每 30 秒全表扫一遍。
-var accountXiuTotalCostCache = newSnapshotCache(5 * time.Minute)
+// 🔴 比上游快照缓存（30 秒）长一个量级：全历史 SUM 要顺着 idx(account_id, created_at)
+// 扫到底，而「这号一共烧了多少」半小时不变也改变不了任何决定。
+// 调用方每 30 秒对账一次，没有这一层等于每 30 秒全表扫一遍。
+const xiuTotalCostTTL = 5 * time.Minute
 
-// 一个号的那一条。**连它算于什么时候一起存** —— 缓存命中时要回的是当初算出来那一刻，
-// 而 snapshotCache 自己不往外说条目的年纪。
-type xiuTotalCostEntry struct {
-	Stats      *service.WindowStats
-	ComputedAt time.Time
-}
+// 查询脱离了请求 context（见 loadXiuTotalCost），总得有个上限，免得挂死的查询永远占着连接
+const xiuTotalCostLoadTimeout = time.Minute
 
-// 🔴 **键是单个账号，不是这一批。** 上游那张今日统计缓存把整批 id 拼成一个键
-// （`buildAccountTodayStatsBatchCacheKey`），那条查询便宜、TTL 只有 30 秒，代价小；
-// 这一条不行：**池子里加一个号、删一个号，整批的键就全变了**，而加号删号正是调用方
-// 那个系统每天在做的事。那样这层缓存会在最该起作用的时候（刚导入一批号、页面正盯着看）
-// 整批落空，而落空一次就是一整轮全历史 SUM。按号存之后，一个号的变动只让它自己那一条过期。
-//
-// 顺带也不必操心 id 的顺序 —— 按批做键时还要先排序才不会被分页顺序抖出无谓的 miss。
+var (
+	accountXiuTotalCostCache = newSnapshotCache(xiuTotalCostTTL)
+	// 上一轮没算完下一轮又到、多个标签页同时开着 —— 同一批缺口只查一次
+	accountXiuTotalCostFlight singleflight.Group
+)
+
+// 🔴 键是单个号，不是整批（上游今日统计是整批一个键）。加号删号是调用方的日常，
+// 按批做键会让整批在刚导入号、页面正盯着看的时候一起落空，落空一次就是一整轮全历史 SUM。
 func xiuTotalCostCacheKey(accountID int64) string {
 	return "accounts_xiu_total_cost:" + strconv.FormatInt(accountID, 10)
-}
-
-// XiuBatchTotalCostRequest 与上游 BatchTodayStatsRequest 同形，刻意不复用它：
-// 那是上游文件里的类型，跟着它改签名等于给自己加一条 rebase 冲突。
-type XiuBatchTotalCostRequest struct {
-	AccountIDs []int64 `json:"account_ids" binding:"required"`
 }
 
 // GetXiuBatchTotalCost 批量取这些号的历史总消耗。
 // POST /api/v1/admin/accounts/xiu-total-cost/batch
 //
-// 路径带 xiu- 前缀与文件名同一个理由：这是 fork 自己加的面，撞不上上游将来的任何路由
-// （见仓库根 PATCHES.md）。
+// 路径带 xiu- 前缀：fork 自己加的面，撞不上上游将来的路由（见仓库根 PATCHES.md）。
 func (h *AccountHandler) GetXiuBatchTotalCost(c *gin.Context) {
-	var req XiuBatchTotalCostRequest
+	var req BatchTodayStatsRequest
 	if err := c.ShouldBindJSON(&req); err != nil {
 		response.BadRequest(c, "Invalid request: "+err.Error())
 		return
 	}
-
 	accountIDs := normalizeInt64IDList(req.AccountIDs)
-	if len(accountIDs) == 0 {
-		response.Success(c, gin.H{"stats": map[string]any{}, "computed_at": time.Now().UTC()})
-		return
-	}
 
 	/*
-	 * 🔴 **`computed_at` 取这一批里最旧的那个。** 混合命中时每个号的数年纪不一样，
-	 * 而协议只给整批一个时刻 —— 报最新的那个等于拿刚算出来的号替五分钟前的号背书。
-	 * 读它的人（xiu-pool 的「看到于」那一格）宁可保守，也不能被骗。
+	 * 🔴 **`computed_at` 取这一批里最旧的那条的计算时刻**（= 过期时刻 - TTL）。
+	 * 混合命中时每个号的年纪不一样，协议只给整批一个时刻；报最新的等于拿刚算出来的号
+	 * 替五分钟前的号背书。读它的人（xiu-pool 的「看到于」）宁可保守。
 	 */
 	stats := make(map[int64]*service.WindowStats, len(accountIDs))
 	missing := make([]int64, 0, len(accountIDs))
-	oldest := time.Now().UTC()
+	computedAt := time.Now()
 	for _, accountID := range accountIDs {
 		entry, ok := accountXiuTotalCostCache.Get(xiuTotalCostCacheKey(accountID))
-		cached, typed := entry.Payload.(xiuTotalCostEntry)
-		if !ok || !typed {
+		if !ok {
 			missing = append(missing, accountID)
 			continue
 		}
-		stats[accountID] = cached.Stats
-		if cached.ComputedAt.Before(oldest) {
-			oldest = cached.ComputedAt
+		stats[accountID] = entry.Payload.(*service.WindowStats)
+		if at := entry.ExpiresAt.Add(-xiuTotalCostTTL); at.Before(computedAt) {
+			computedAt = at
 		}
 	}
 
 	if len(missing) > 0 {
-		fresh, err := h.accountUsageService.GetXiuTotalCostBatch(c.Request.Context(), missing)
+		fresh, err := h.loadXiuTotalCost(c.Request.Context(), missing)
 		if err != nil {
-			response.ErrorFrom(c, err)
+			response.ErrorFrom(c, fmt.Errorf("load xiu total cost for %d accounts: %w", len(missing), err))
 			return
 		}
-		computedAt := time.Now().UTC()
 		for accountID, one := range fresh {
 			stats[accountID] = one
-			accountXiuTotalCostCache.Set(
-				xiuTotalCostCacheKey(accountID),
-				xiuTotalCostEntry{Stats: one, ComputedAt: computedAt},
-			)
 		}
 	}
 
-	// 现算了几个 / 直接拿缓存的几个，排查「这一口为什么慢」时只看这一行就够
-	c.Header("X-Snapshot-Cache", strconv.Itoa(len(accountIDs)-len(missing))+"/"+strconv.Itoa(len(accountIDs)))
-	response.Success(c, gin.H{"stats": stats, "computed_at": oldest})
+	// 命中数/总数，排查「这一口为什么慢」时只看这一行。不复用上游的 X-Snapshot-Cache：
+	// 那个头的值是 hit/miss，同名不同格式会误导人
+	c.Header("X-Xiu-Cost-Cache", strconv.Itoa(len(accountIDs)-len(missing))+"/"+strconv.Itoa(len(accountIDs)))
+	response.Success(c, gin.H{"stats": stats, "computed_at": computedAt.UTC()})
+}
+
+// 🔴 查询**不跟着请求取消**：全历史 SUM 算到一半被调用方超时掐掉的话，算力白烧、也进不了缓存，
+// 下一轮从零再来 —— 慢查询因此永远填不满缓存。脱离之后算完照样落缓存，下一轮直接命中。
+//
+// 返回的 map 被同一个 flight 的所有等待者共享，只读。
+func (h *AccountHandler) loadXiuTotalCost(ctx context.Context, accountIDs []int64) (map[int64]*service.WindowStats, error) {
+	// accountIDs 已由 normalizeInt64IDList 排过序，同一批缺口必然拼出同一个键
+	value, err, _ := accountXiuTotalCostFlight.Do(fmt.Sprint(accountIDs), func() (any, error) {
+		loadCtx, cancel := context.WithTimeout(context.WithoutCancel(ctx), xiuTotalCostLoadTimeout)
+		defer cancel()
+		fresh, err := h.accountUsageService.GetXiuTotalCostBatch(loadCtx, accountIDs)
+		if err != nil {
+			return nil, err
+		}
+		for accountID, one := range fresh {
+			accountXiuTotalCostCache.Set(xiuTotalCostCacheKey(accountID), one)
+		}
+		return fresh, nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return value.(map[int64]*service.WindowStats), nil
 }
