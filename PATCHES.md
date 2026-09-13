@@ -20,8 +20,7 @@ image. The moment that stopped being true, the build chain had to be wired up
 short and to drop each entry as soon as its reason is gone.
 
 **两条补丁的性质不同**，别按同一条标准审：第一条是上游的 bug，挂着 PR，合并即撤；
-第二条是 xiu 自己要的一块面（上游没有理由长出它），**没有撤销日期** —— 它缩到一行，
-是因为一行就是 gin 路由注册的全部代价。
+第二条是 xiu 自己要的一块面（上游没有理由长出它），**没有撤销日期**。
 
 ## Patch set
 
@@ -52,31 +51,23 @@ strip 就是它唯一的断点数压制，拿掉后实测顶到 5 块，而上�
 
 ### 账号历史总消耗的批量接口
 
-**没有上游 PR，也不打算提。** 这不是上游的缺陷 —— 它的用量接口按窗口设计是对的
-（`today-stats/batch` 钉在今天、`/:id/stats` 夹在 90 天内）。要「从头到现在一共烧了多少」
-的是 xiu-pool 的 sub2api 页：那一页每一行第一眼要答的就是「这号值不值钱」，
-而那是个不带窗口的问题。
+**没有上游 PR，也不打算提。** 上游的用量接口按窗口设计是对的；要「这号一共烧了多少」的是
+xiu-pool 的 sub2api 页，每 30 秒对账一次、一次一整个池子。上游能答这句话的只有
+`/admin/usage/stats?account_id=`（或 `/:id/stats?days=90`）—— **一次一个号**，
+而且那条 SQL 还要按 endpoint 做四组 GROUPING SETS，缓存又只有 30 秒，
+等于每轮每个号全表扫一遍。这条补丁买的是**合批 + 长缓存**。
 
-面全在两个新文件里，零冲突：
+⚠️ **「历史」只到 usage_logs 的保留期为止**（`dashboard_aggregation.retention.usage_logs_days`，
+默认 90 天，部署侧未覆盖）。起点放到 1970 只是「不设下界」，超出保留期的行早被删了。
+要更长就调保留期，不是改补丁。
 
-- `backend/internal/service/xiu_account_cost.go` —— `GetXiuTotalCostBatch`。
-  **不新写 SQL**，复用上游的 `GetAccountWindowStatsBatch`，只把窗口起点放到 1970。
-  金额口径因此与「今日消耗」逐字相同（账号口径 = `SUM(COALESCE(account_stats_cost,
-  total_cost) * COALESCE(account_rate_multiplier, 1))`），两个数才比得起来。
+面全在 `xiu_` 基名的新文件里，缓存、并发穿透、`computed_at` 口径等决定的「为什么」
+写在代码注释里，不在这里复述：
+
+- `backend/internal/service/xiu_account_cost.go` —— `GetXiuTotalCostBatch`，复用上游
+  `GetAccountWindowStatsBatch`，不新写 SQL，金额口径与「今日消耗」逐字相同。
 - `backend/internal/handler/admin/xiu_account_cost_handler.go` ——
   `POST /api/v1/admin/accounts/xiu-total-cost/batch`。
 
-两个决定值得记下来：
-
-- 🔴 **缓存 TTL 五分钟，比上游那几张（30 秒）长一个量级。** 判据是代价与变速不匹配：
-  全历史 `SUM` 要顺着 `idx(account_id, created_at)` 扫到底，比「今日」贵得多；
-  而「这号一共烧了多少」半小时不变也改变不了任何决定。调用方每 30 秒对账一次，
-  没有这一层等于每 30 秒全表扫一遍。`GetOrLoad` 的 singleflight 顺手挡掉并发穿透。
-- 🔴 **`computed_at` 跟着 payload 一起进缓存**，所以缓存命中时回的是当初算出来那一刻，
-  不是这次请求的时刻。读它的人拿它当「看到于」画在屏幕上 —— 回 HTTP 往返时刻的话，
-  等于让一个五分钟前的数拿此刻的新鲜度背书。
-
-**路径与文件名都带 `xiu` 前缀**：撞不上上游将来的任何路由，rebase 时一眼认得出是谁的。
-
-**这条补丁什么时候能撤**：上游哪天把「起点可给」抽成公开 API，
-`xiu_account_cost.go` 整份删掉、路由改指过去即可。
+**这条补丁什么时候能撤**：上游哪天出了按号批量、起点可给的用量接口，两份 `xiu_` 文件整份删掉、
+调用方改指过去即可。

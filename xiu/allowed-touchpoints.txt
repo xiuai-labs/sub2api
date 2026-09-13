@@ -18,8 +18,5 @@ backend/internal/service/gateway_count_tokens.go
 backend/internal/service/gateway_forward.go
 backend/internal/service/gateway_system_cache_control_test.go
 
-# ── 历史总消耗：给 xiu-pool 的 sub2api 页那一列供数 ────────────────────────────
-# 处理与聚合都在 xiu_ 基名的新文件里（service/xiu_account_cost.go、
-# handler/admin/xiu_account_cost_handler.go），零冲突。只有 gin 的路由注册没有
-# 第二个挂载点 —— 这一行就是全部代价。
+# ── 历史总消耗的批量接口：只有 gin 路由注册没有第二个挂载点（见 PATCHES.md）──────
 backend/internal/server/routes/admin.go
