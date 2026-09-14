@@ -57,17 +57,21 @@ xiu-pool 的 sub2api 页，每 30 秒对账一次、一次一整个池子。上�
 而且那条 SQL 还要按 endpoint 做四组 GROUPING SETS，缓存又只有 30 秒，
 等于每轮每个号全表扫一遍。这条补丁买的是**合批 + 长缓存**。
 
-⚠️ **「历史」只到 usage_logs 的保留期为止**（`dashboard_aggregation.retention.usage_logs_days`，
-默认 90 天，部署侧未覆盖）。起点放到 1970 只是「不设下界」，超出保留期的行早被删了。
-要更长就调保留期，不是改补丁。
+**「历史」跨得过 usage_logs 的保留期**（`dashboard_aggregation.retention.usage_logs_days`，默认 90 天）：
+`usage_logs` 上挂一个 AFTER DELETE 触发器，被删的行在同一事务里按号累加进归档表，只增不减；
+读数 = 归档 + 现存行。保留期清理、管理员手动清、删号级联一律接住，上游 Go 代码一行不动。
+⚠️ 分区表的清理走 DROP 分区、绕过触发器 —— 迁移发现 `usage_logs` 是分区表就直接报错。
 
-面全在 `xiu_` 基名的新文件里，缓存、并发穿透、`computed_at` 口径等决定的「为什么」
+面全在 `xiu_` 基名的新文件里，缓存、并发、口径等决定的「为什么」
 写在代码注释里，不在这里复述：
 
-- `backend/internal/service/xiu_account_cost.go` —— `GetXiuTotalCostBatch`，复用上游
-  `GetAccountWindowStatsBatch`，不新写 SQL，金额口径与「今日消耗」逐字相同。
+- `backend/migrations/xiu_001_account_cost_totals.sql` —— 归档表与触发器。不带数字编号，
+  排在所有上游迁移之后，runner 跳过已应用的，上游以后的迁移照常执行。
+- `backend/internal/repository/xiu_account_cost_repo.go` —— 读数，一条语句。聚合列逐行照抄
+  上游 `GetAccountWindowStatsBatch`，与触发器同口径；三处对不上时同名 `_test.go` 拦下。
+- `backend/internal/service/xiu_account_cost.go` —— `GetXiuTotalCostBatch`。
 - `backend/internal/handler/admin/xiu_account_cost_handler.go` ——
   `POST /api/v1/admin/accounts/xiu-total-cost/batch`。
 
-**这条补丁什么时候能撤**：上游哪天出了按号批量、起点可给的用量接口，两份 `xiu_` 文件整份删掉、
-调用方改指过去即可。
+**这条补丁什么时候能撤**：上游哪天出了按号批量、跨保留期的累计用量，`xiu_` 文件整份删掉、
+调用方改指过去；触发器、函数与 `xiu_account_cost_totals` 表另写一条迁移删掉（已应用的迁移文件不能改）。

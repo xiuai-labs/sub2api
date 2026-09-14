@@ -12,9 +12,9 @@ import (
 	"golang.org/x/sync/singleflight"
 )
 
-// 🔴 比上游快照缓存（30 秒）长一个量级：全历史 SUM 要顺着 idx(account_id, created_at)
-// 扫到底，而「这号一共烧了多少」半小时不变也改变不了任何决定。
-// 调用方每 30 秒对账一次，没有这一层等于每 30 秒全表扫一遍。
+// 🔴 比上游快照缓存（30 秒）长一个量级：现存日志的 SUM 要顺着 idx(account_id, created_at)
+// 扫完整个保留期，而「这号一共烧了多少」半小时不变也改变不了任何决定。
+// 调用方每 30 秒对账一次，没有这一层等于每 30 秒把保留期内的日志扫一遍。
 const xiuTotalCostTTL = 5 * time.Minute
 
 // 查询脱离了请求 context（见 loadXiuTotalCost），总得有个上限，免得挂死的查询永远占着连接
@@ -54,11 +54,12 @@ func (h *AccountHandler) GetXiuBatchTotalCost(c *gin.Context) {
 	computedAt := time.Now()
 	for _, accountID := range accountIDs {
 		entry, ok := accountXiuTotalCostCache.Get(xiuTotalCostCacheKey(accountID))
-		if !ok {
+		cached, isStats := entry.Payload.(*service.WindowStats)
+		if !ok || !isStats {
 			missing = append(missing, accountID)
 			continue
 		}
-		stats[accountID] = entry.Payload.(*service.WindowStats)
+		stats[accountID] = cached
 		if at := entry.ExpiresAt.Add(-xiuTotalCostTTL); at.Before(computedAt) {
 			computedAt = at
 		}
@@ -81,7 +82,7 @@ func (h *AccountHandler) GetXiuBatchTotalCost(c *gin.Context) {
 	response.Success(c, gin.H{"stats": stats, "computed_at": computedAt.UTC()})
 }
 
-// 🔴 查询**不跟着请求取消**：全历史 SUM 算到一半被调用方超时掐掉的话，算力白烧、也进不了缓存，
+// 🔴 查询**不跟着请求取消**：SUM 算到一半被调用方超时掐掉的话，算力白烧、也进不了缓存，
 // 下一轮从零再来 —— 慢查询因此永远填不满缓存。脱离之后算完照样落缓存，下一轮直接命中。
 //
 // 返回的 map 被同一个 flight 的所有等待者共享，只读。
@@ -102,5 +103,9 @@ func (h *AccountHandler) loadXiuTotalCost(ctx context.Context, accountIDs []int6
 	if err != nil {
 		return nil, err
 	}
-	return value.(map[int64]*service.WindowStats), nil
+	fresh, ok := value.(map[int64]*service.WindowStats)
+	if !ok {
+		return nil, fmt.Errorf("unexpected xiu total cost flight result %T", value)
+	}
+	return fresh, nil
 }
