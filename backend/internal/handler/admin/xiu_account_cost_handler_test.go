@@ -29,7 +29,7 @@ type xiuCostRepoProbe struct {
 	err     error
 }
 
-func (r *xiuCostRepoProbe) GetAccountWindowStatsBatch(ctx context.Context, accountIDs []int64, _ time.Time) (map[int64]*usagestats.AccountStats, error) {
+func (r *xiuCostRepoProbe) GetXiuAccountTotalCostBatch(ctx context.Context, accountIDs []int64) (map[int64]*usagestats.AccountStats, error) {
 	r.calls.Add(1)
 	r.mu.Lock()
 	r.gotIDs = append(r.gotIDs, accountIDs)
