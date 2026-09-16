@@ -12,3 +12,8 @@ PATCHES.md
 
 # ── 历史总消耗的批量接口：只有 gin 路由注册没有第二个挂载点（见 PATCHES.md）──────
 backend/internal/server/routes/admin.go
+
+# ── 长上下文缺 credits 不封整号：429 分类 / 调度 key / 进门估长度，各一处挂载（见 PATCHES.md）──
+backend/internal/handler/gateway_handler.go
+backend/internal/service/model_rate_limit.go
+backend/internal/service/ratelimit_service.go

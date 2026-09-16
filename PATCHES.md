@@ -1,7 +1,7 @@
 # Patches
 
 This is a fork of [Wei-Shaw/sub2api](https://github.com/Wei-Shaw/sub2api) for the xiu
-deployment. It carries **one** patch.
+deployment. It carries **two** patches.
 
 ## The rule
 
@@ -19,7 +19,7 @@ image. The moment that stopped being true, the build chain had to be wired up
 (`release.sh`, `image-pins.env`, this file). That cost is the reason to keep the list
 short and to drop each entry as soon as its reason is gone.
 
-**剩下这条没有撤销日期**：它不是上游的 bug，是 xiu 自己要的一块面，上游没有理由长出它。
+**「历史总消耗」那条没有撤销日期**：它不是上游的 bug，是 xiu 自己要的一块面，上游没有理由长出它。
 所以「退回官方镜像」这条退路已经不在了 —— 它只在补丁数归零时成立，而 2026-09-16
 cache_control 那条被上游收编时，留下的正好是不会归零的那一条。
 
@@ -28,6 +28,7 @@ cache_control 那条被上游收编时，留下的正好是不会归零的那一
 | Files | Why it must live in an upstream file |
 |---|---|
 | `backend/internal/server/routes/admin.go`（**一行**） | 账号历史总消耗的批量接口。聚合与 HTTP 处理都在 `xiu_` 基名的新文件里，只有 gin 的路由注册没有第二个挂载点。 |
+| `backend/internal/service/ratelimit_service.go`（**一处 if**）<br>`backend/internal/service/model_rate_limit.go`（**一行**）<br>`backend/internal/handler/gateway_handler.go`（**一行**） | 长上下文缺 credits 的 429 不封整号。逻辑全在 `xiu_long_context.go`；三处分别是 429 分类入口、调度的限流 key、请求进门时估长度，上游都没有钩子。 |
 
 ### 账号历史总消耗的批量接口
 
@@ -55,3 +56,18 @@ xiu-pool 的 sub2api 页，每 30 秒对账一次、一次一整个池子。上�
 
 **这条补丁什么时候能撤**：上游哪天出了按号批量、跨保留期的累计用量，`xiu_` 文件整份删掉、
 调用方改指过去；触发器、函数与 `xiu_account_cost_totals` 表另写一条迁移删掉（已应用的迁移文件不能改）。
+
+### 长上下文缺 credits 不封整号
+
+**2026-09-16 线上事故**：一个 sonnet-4-6 长会话（>200K）每发一次，多数号回 429
+`Usage credits are required for long context requests.`，上游按月末重置点**封整个号**、
+轮 10 个号封 10 个。池子缩水后别的用户收到 `would exceed your account's rate limit`。
+24h 内 86 个请求打了 891 次上游。
+
+补丁把它改成 `<模型>#long_context` 这个模型级 scope，调度时**只有估算为长请求**才看它；
+短请求、别的模型照常用这个号。估算为什么刻意偏低、scope 为什么封顶 5 小时，
+写在 `backend/internal/service/xiu_long_context.go` 的注释里。
+
+**可以提上游**（与 Fable 的 credits_required 处理同类，上游已有先例 #6484），合了就撤。
+**撤的时候**：删 `xiu_long_context{,_test}.go`，三处挂载点各删掉本补丁那一两行。
+
