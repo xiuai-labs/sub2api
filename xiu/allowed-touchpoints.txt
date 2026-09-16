@@ -10,13 +10,5 @@
 # 新增文件，刻意放在仓库根 —— 补丁台账要让人在读任何代码之前先看见。
 PATCHES.md
 
-# ── prompt cache: 不再剥离客户端 system 上的 cache_control（上游 PR #6943）──────
-# 三处调用点 + 那个真正执行删除的函数，都在上游文件里：Go 的包布局不允许把
-# GatewayService 的方法搬进 xiu/。补丁本身是净删除，合并后这四行就该消失。
-backend/internal/service/gateway_claude_oauth_body.go
-backend/internal/service/gateway_count_tokens.go
-backend/internal/service/gateway_forward.go
-backend/internal/service/gateway_system_cache_control_test.go
-
 # ── 历史总消耗的批量接口：只有 gin 路由注册没有第二个挂载点（见 PATCHES.md）──────
 backend/internal/server/routes/admin.go
