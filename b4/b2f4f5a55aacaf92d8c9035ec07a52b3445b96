@@ -1,0 +1,21 @@
+PATCHES.md
+  s_57342582b0976a::t_6fbc9970e0b609 31
+xiu/allowed-touchpoints.txt
+  s_57342582b0976a::t_6fbc9970e0b609 17-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "b4b2f4f5a55aacaf92d8c9035ec07a52b3445b96",
+  "prompts": {},
+  "sessions": {
+    "s_57342582b0976a": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f04224de-0d61-4992-92ec-5c66a62fff2d",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    }
+  }
+}
