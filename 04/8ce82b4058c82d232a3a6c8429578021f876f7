@@ -1,0 +1,37 @@
+PATCHES.md
+  s_6c87c7c2f9bd5d::t_473611e2f34878 1-53
+backend/internal/handler/gateway_handler.go
+  s_6c87c7c2f9bd5d::t_f15ff869ea4855 210
+backend/internal/service/model_rate_limit.go
+  s_6c87c7c2f9bd5d::t_b37de4cfde728b 93
+backend/internal/service/ratelimit_service.go
+  s_6c87c7c2f9bd5d::t_3a95946d3ac37a 374-377
+backend/internal/service/xiu_long_context.go
+  s_6c87c7c2f9bd5d::t_827a879526c1b4 1-205
+backend/internal/service/xiu_long_context_test.go
+  s_6c87c7c2f9bd5d::t_a93588bc718f6e 1-152
+backend/migrations/xiu_001_account_cost_totals.sql
+  s_6c87c7c2f9bd5d::t_de71ffc055f961 1-73
+backend/migrations/xiu_002_drop_account_cost_totals.sql
+  s_6c87c7c2f9bd5d::t_d21e649f9dabb9 1-9
+xiu/allowed-touchpoints.txt
+  s_6c87c7c2f9bd5d::t_499c2ec98dfa61 1-16
+xiu/check-touchpoints.sh
+  s_6c87c7c2f9bd5d::t_623413f4d18326 1-76
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "048ce82b4058c82d232a3a6c8429578021f876f7",
+  "prompts": {},
+  "sessions": {
+    "s_6c87c7c2f9bd5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cb6ac44-dc5f-4c0f-af52-816912b716bc",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    }
+  }
+}
