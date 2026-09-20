@@ -1341,6 +1341,9 @@ func (s *PricingService) matchByModelFamily(model string) *LiteLLMModelPricing {
 	families := []modelFamily{
 		// Opus 5 与 Opus 4.8 同价（$5/$25 per MTok）。定价数据缺失 claude-opus-5 时
 		// 必须回退到 4.8，否则会掉进 "opus-4" 系列按 $15/$75 计费（3 倍超收）。
+		// Opus 5.5 比 Opus 5 便宜（$4/$20）且名字含 "claude-opus-5"，必须排在前面；
+		// 价格表里没有它时宁可返回 nil 走硬编码兜底，也不借用 Opus 5 的价。
+		{name: "opus-5.5", match: []string{"claude-opus-5-5", "claude-opus-5.5"}},
 		{name: "opus-5", match: []string{"claude-opus-5"}, pricing: []string{"claude-opus-5", "claude-opus-4-8"}},
 		{name: "opus-4.8", match: []string{"claude-opus-4-8", "claude-opus-4.8"}, pricing: []string{"claude-opus-4-8", "claude-opus-4.8", "claude-opus-4-7"}},
 		{name: "opus-4.7", match: []string{"claude-opus-4-7", "claude-opus-4.7"}, pricing: []string{"claude-opus-4-7", "claude-opus-4.7", "claude-opus-4-6"}},
@@ -1375,6 +1378,8 @@ func (s *PricingService) matchByModelFamily(model string) *LiteLLMModelPricing {
 		switch {
 		case strings.Contains(model, "opus"):
 			switch {
+			case isClaudeOpus55Model(model):
+				fallbackName = "opus-5.5"
 			// "opus-5" 必须先判：不能用裸 "5" 匹配，否则 claude-opus-4-5 会被误判。
 			case strings.Contains(model, "opus-5") || strings.Contains(model, "opus5"):
 				fallbackName = "opus-5"

@@ -1,0 +1,26 @@
+# Upstream files this fork edits. One line per path, `#` starts a comment.
+#
+# The gate (check-touchpoints.sh) reads this in BOTH directions: an undeclared edit fails,
+# and so does a declared-but-unmodified entry. Declare a file when the change lands, never
+# before — an entry with no diff behind it is a standing permission nobody reviewed.
+#
+# Every entry here is merge risk we pay for on each upstream rebase, so the list should
+# shrink, not grow. Each one needs a row in PATCHES.md saying why it cannot live in xiu/.
+
+# 新增文件，刻意放在仓库根 —— 补丁台账要让人在读任何代码之前先看见。
+PATCHES.md
+
+# ── 长上下文缺 credits 不封整号：429 分类 / 调度 key / 进门估长度，各一处挂载（见 PATCHES.md）──
+backend/internal/handler/gateway_handler.go
+backend/internal/service/model_rate_limit.go
+backend/internal/service/ratelimit_service.go
+
+# ── 生图传输层错误走 failover：两个转发点各换成一次 helper 调用（见 PATCHES.md）──
+backend/internal/service/openai_images.go
+backend/internal/service/openai_images_responses.go
+
+# ── Opus 5.5：CLI 伪装版本过上游闸门 + 计价不被 opus-5 子串吞掉（见 PATCHES.md）──
+backend/internal/pkg/claude/constants.go
+backend/internal/pkg/claude/cli_version_test.go
+backend/internal/service/billing_service.go
+backend/internal/service/pricing_service.go
