@@ -1,0 +1,27 @@
+backend/internal/service/anthropic_long_context_test.go
+  s_6c87c7c2f9bd5d::t_259b42ede1a7c3 1-157
+backend/internal/service/anthropic_long_context.go
+  s_6c87c7c2f9bd5d::t_6081ffe7cfda4f 1-226
+backend/internal/handler/gateway_handler.go
+  s_6c87c7c2f9bd5d::t_a90370f71f7e3f 210-211
+backend/internal/service/model_rate_limit.go
+  s_6c87c7c2f9bd5d::t_dd2e97aadd1697 93
+backend/internal/service/ratelimit_service.go
+  s_6c87c7c2f9bd5d::t_243818ae5a70cf 374-379
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "90e24efc10ec4aba0a7b3d7885c0e7d7f33c6b3e",
+  "prompts": {},
+  "sessions": {
+    "s_6c87c7c2f9bd5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cb6ac44-dc5f-4c0f-af52-816912b716bc",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    }
+  }
+}
