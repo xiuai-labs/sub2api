@@ -371,6 +371,12 @@ func (s *RateLimitService) HandleUpstreamError(ctx context.Context, account *Acc
 	// otherwise a broad "rate limit" keyword rule can shorten a multi-hour
 	// cooldown to a local temporary pause.
 	if statusCode == http.StatusTooManyRequests && account.Platform == PlatformAnthropic {
+		// Long-context credits_required is an entitlement failure for this account x model x
+		// long requests only. It must run before the Fable branch, which would otherwise
+		// widen it into a Fable-family limit (see anthropic_long_context.go).
+		if s.persistAnthropicLongContextCreditsRequired(ctx, account, headers, responseBody, firstRequestedModel(requestedModel)) {
+			return false
+		}
 		// Fable may be rejected because the organization has no usage credits for
 		// this model. Anthropic reports that as 429, but it is a model entitlement
 		// failure rather than a shared account window exhaustion.

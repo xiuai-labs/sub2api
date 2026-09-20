@@ -207,6 +207,8 @@ func (h *GatewayHandler) Messages(c *gin.Context) {
 
 	// 在请求上下文中记录 thinking 状态，供 Antigravity 最终模型 key 推导/模型维度限流使用
 	c.Request = c.Request.WithContext(service.WithThinkingEnabled(c.Request.Context(), parsedReq.ThinkingEnabled, h.metadataBridgeEnabled()))
+	// 记录是否为长上下文请求（>200K），供 Anthropic 长上下文 credits_required 的模型级限流使用
+	c.Request = c.Request.WithContext(service.WithAnthropicLongContextRequest(c.Request.Context(), body))
 
 	setOpsRequestContext(c, reqModel, reqStream)
 	setOpsEndpointContext(c, "", int16(service.RequestTypeFromLegacy(reqStream, false)))

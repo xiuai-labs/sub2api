@@ -90,6 +90,7 @@ func (a *Account) modelRateLimitKeysForRequest(ctx context.Context, requestedMod
 		if isAnthropicFableModel(modelKey) && modelKey != anthropicFableRateLimitKey {
 			keys = append(keys, anthropicFableRateLimitKey)
 		}
+		keys = append(keys, anthropicLongContextRateLimitKeys(ctx, modelKey)...)
 	}
 	return keys
 }
