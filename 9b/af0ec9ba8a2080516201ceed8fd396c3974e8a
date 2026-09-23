@@ -7,11 +7,15 @@ backend/internal/service/ratelimit_service.go
 xiu/allowed-touchpoints.txt
   s_6c87c7c2f9bd5d::t_ba739d92925ef2 1-16
   s_883ae0bed73afa::t_8694a9fbcc608b 17-20
+  s_667907d9fef14e::t_d1531e6cb21738 21
 backend/migrations/xiu_002_drop_account_cost_totals.sql
   s_6c87c7c2f9bd5d::t_7d2f17161426ff 1-9
 PATCHES.md
   s_6c87c7c2f9bd5d::t_12cd0833b797d6 1-3,5-30,32-45,62-64,75-80
   s_883ae0bed73afa::t_0c70ee750f36a6 31,46-59,61
+  s_667907d9fef14e::t_04aef6410ed473 4,65-73
+  s_667907d9fef14e::t_d1531e6cb21738 74
+  s_667907d9fef14e::t_c16dafe9781559 60
 backend/internal/service/xiu_long_context.go
   s_6c87c7c2f9bd5d::t_bcba61d683be69 1-205
 xiu/check-touchpoints.sh
@@ -35,6 +39,14 @@ backend/internal/service/xiu_long_context_test.go
   "base_commit_sha": "9baf0ec9ba8a2080516201ceed8fd396c3974e8a",
   "prompts": {},
   "sessions": {
+    "s_667907d9fef14e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e06a66f8-cf90-4ca4-9ddd-7f675f7a111b",
+        "model": "unknown"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    },
     "s_6c87c7c2f9bd5d": {
       "agent_id": {
         "tool": "claude",
