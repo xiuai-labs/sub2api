@@ -1,0 +1,93 @@
+backend/internal/service/gateway_anthropic_apikey_passthrough_test.go
+  s_667907d9fef14e::t_91c4e84570d229 1775
+backend/internal/service/xiu_long_context_test.go
+  s_6c87c7c2f9bd5d::t_2fe8e0b043de63 1-152
+backend/migrations/xiu_002_drop_account_cost_totals.sql
+  s_6c87c7c2f9bd5d::t_7d2f17161426ff 1-9
+backend/internal/service/xiu_long_context.go
+  s_6c87c7c2f9bd5d::t_bcba61d683be69 1-205
+backend/internal/service/xiu_opus55_thinking_test.go
+  s_667907d9fef14e::t_91c4e84570d229 14,28,37-38,52,57-96,98-104
+  s_667907d9fef14e::t_899c214208aac7 1-13,15-27,29-36,39-51,53-56,97,105
+backend/internal/service/xiu_openai_images_transport_failover_test.go
+  s_883ae0bed73afa::t_930704326df983 1-86
+backend/migrations/xiu_001_account_cost_totals.sql
+  s_6c87c7c2f9bd5d::t_0763ad329d9357 1-73
+backend/internal/service/model_rate_limit.go
+  s_6c87c7c2f9bd5d::t_7a76301f604558 93
+backend/internal/service/xiu_codex_safety_buffering_test.go
+  s_667907d9fef14e::t_56ee37fa2cd2b1 1-107
+backend/internal/service/openai_images_responses.go
+  s_883ae0bed73afa::t_108760477ae12c 1865-1867
+backend/internal/service/gateway_count_tokens.go
+  s_667907d9fef14e::t_44f94eff651220 31
+backend/internal/handler/xiu_openai_images_transport_failover_test.go
+  s_883ae0bed73afa::t_41779cb5959837 1-109
+backend/internal/service/openai_ws_v2_passthrough_adapter.go
+  s_667907d9fef14e::t_2474af8520c579 1282
+backend/internal/service/openai_plugin_transport.go
+  s_667907d9fef14e::t_2474af8520c579 11-12
+backend/internal/service/xiu_codex_safety_buffering.go
+  s_667907d9fef14e::t_f468188d7cc1ee 1-103
+backend/internal/handler/gateway_handler.go
+  s_6c87c7c2f9bd5d::t_33f2bee2df2d34 210
+PATCHES.md
+  s_6c87c7c2f9bd5d::t_12cd0833b797d6 1-3,5-30,72-85,102-104,115-120
+  s_667907d9fef14e::t_c16dafe9781559 100
+  s_667907d9fef14e::t_d1531e6cb21738 114
+  s_883ae0bed73afa::t_0c70ee750f36a6 31,86-99,101
+  s_667907d9fef14e::t_bc07cbaf55db42 4,34,36-42,52-54
+  s_667907d9fef14e::t_04aef6410ed473 105-113
+  s_667907d9fef14e::t_742fc1c9f9161e 32,35,43-51,55-56
+  s_667907d9fef14e::t_775d8071a28bc7 33,57-71
+backend/internal/service/openai_images.go
+  s_883ae0bed73afa::t_2ac154eef3a3b0 678-680
+backend/internal/service/xiu_opus55_thinking.go
+  s_667907d9fef14e::t_ed9a6d1097526a 1-8,11,20-23,35,47-49
+  s_667907d9fef14e::t_d089b59cf56681 9-10,12-19,24-34,36-46
+backend/internal/service/gateway_forward.go
+  s_667907d9fef14e::t_44f94eff651220 102
+backend/internal/service/ratelimit_service.go
+  s_6c87c7c2f9bd5d::t_e2df5a335143c7 374-377
+xiu/check-touchpoints.sh
+  s_6c87c7c2f9bd5d::t_a3f0d9a8605673 1-76
+xiu/allowed-touchpoints.txt
+  s_667907d9fef14e::t_742fc1c9f9161e 22
+  s_667907d9fef14e::t_bc07cbaf55db42 23-25
+  s_6c87c7c2f9bd5d::t_ba739d92925ef2 1-16
+  s_667907d9fef14e::t_d1531e6cb21738 21
+  s_883ae0bed73afa::t_8694a9fbcc608b 17-20
+  s_667907d9fef14e::t_1cb4d8e54870c2 26-29
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "302aed5527b3379eec9c9f046aecdced1f4d57cc",
+  "prompts": {},
+  "sessions": {
+    "s_667907d9fef14e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e06a66f8-cf90-4ca4-9ddd-7f675f7a111b",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    },
+    "s_6c87c7c2f9bd5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cb6ac44-dc5f-4c0f-af52-816912b716bc",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    },
+    "s_883ae0bed73afa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9239772-58ff-48de-aae8-b0e15d8c99c3",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": null
+    }
+  }
+}
