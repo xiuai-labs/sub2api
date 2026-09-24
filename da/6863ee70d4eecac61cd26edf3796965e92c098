@@ -1,0 +1,126 @@
+backend/internal/server/routes/admin.go
+  s_5376b8b5242d45::t_f3d7610eccf4aa 707
+backend/internal/service/xiu_usage_downgrade_test.go
+  s_5376b8b5242d45::t_4cc182c9997b27 1-10,12,14-164,168-169,171,175,178,184,189,192,198,213
+  s_5376b8b5242d45::t_46754d6b4b2975 190-191,193-197,199-200,205-206
+  s_5376b8b5242d45::t_fcb1613b7c6dcf 185,187
+  s_5376b8b5242d45::t_d394125291880c 11,13,165-167,170,172-174,176-177,179-183,186,188,201-204,207-212
+backend/internal/service/openai_gateway_usage.go
+  s_5376b8b5242d45::t_fcb1613b7c6dcf 408
+backend/internal/service/xiu_openai_images_transport_failover_test.go
+  s_883ae0bed73afa::t_930704326df983 1-86
+backend/internal/service/openai_images.go
+  s_883ae0bed73afa::t_2ac154eef3a3b0 678-680
+backend/internal/service/ratelimit_service.go
+  s_6c87c7c2f9bd5d::t_e2df5a335143c7 374-377
+backend/internal/handler/xiu_openai_images_transport_failover_test.go
+  s_883ae0bed73afa::t_41779cb5959837 1-109
+xiu/check-touchpoints.sh
+  s_6c87c7c2f9bd5d::t_a3f0d9a8605673 1-76
+backend/migrations/xiu_001_account_cost_totals.sql
+  s_6c87c7c2f9bd5d::t_0763ad329d9357 1-73
+frontend/src/composables/xiu_useUsageDowngrades.ts
+  s_5376b8b5242d45::t_d55e3a9db2e48b 40-41,43-45,60
+  s_5376b8b5242d45::t_ccf866dc9ebacf 34-37
+  s_5376b8b5242d45::t_e954f39f7ffbc3 1-3,7-24,32-33,38-39,46,48-51,54-59,61-64
+  s_5376b8b5242d45::t_efbbb1f9f15c6e 4-6,25-31,42,47,52-53
+backend/internal/repository/xiu_usage_downgrade_repo.go
+  s_5376b8b5242d45::t_f3d7610eccf4aa 3-4,6,8,10
+  s_5376b8b5242d45::t_ca98d46fbb183f 1-2,5,7,9
+backend/internal/service/gateway_count_tokens.go
+  s_667907d9fef14e::t_44f94eff651220 31
+frontend/src/components/admin/usage/xiu_DowngradeBadge.vue
+  s_5376b8b5242d45::t_e954f39f7ffbc3 1-61
+backend/internal/service/gateway_forward.go
+  s_667907d9fef14e::t_44f94eff651220 102
+backend/internal/service/xiu_long_context_test.go
+  s_6c87c7c2f9bd5d::t_2fe8e0b043de63 1-152
+backend/internal/service/model_rate_limit.go
+  s_6c87c7c2f9bd5d::t_7a76301f604558 93
+backend/internal/service/xiu_opus55_thinking_test.go
+  s_667907d9fef14e::t_91c4e84570d229 14,28,37-38,52,57-96,98-104
+  s_667907d9fef14e::t_899c214208aac7 1-13,15-27,29-36,39-51,53-56,97,105
+backend/internal/service/xiu_usage_downgrade.go
+  s_5376b8b5242d45::t_46754d6b4b2975 17-18,60,432-436
+  s_5376b8b5242d45::t_fcb1613b7c6dcf 424-426
+  s_5376b8b5242d45::t_70796de927341c 1-16,19,23-26,28-37,39-51,55-59,61-74,76,83-271,275-423,427-431,437-446,449-450,456-467,475-476,483,512,514
+  s_5376b8b5242d45::t_b17dcf1f342d66 272-274
+  s_5376b8b5242d45::t_f3d7610eccf4aa 20-22,27,38,52-54,75,77-82,447-448,451-455,468-474,477-482,484-511,513
+backend/internal/service/gateway_anthropic_apikey_passthrough_test.go
+  s_667907d9fef14e::t_91c4e84570d229 1775
+backend/internal/service/xiu_long_context.go
+  s_6c87c7c2f9bd5d::t_bcba61d683be69 1-205
+backend/internal/service/openai_images_responses.go
+  s_883ae0bed73afa::t_108760477ae12c 1865-1867
+backend/internal/service/xiu_opus55_thinking.go
+  s_667907d9fef14e::t_d089b59cf56681 9-10,12-19,24-34,36-46
+  s_667907d9fef14e::t_ed9a6d1097526a 1-8,11,20-23,35,47-49
+PATCHES.md
+  s_667907d9fef14e::t_04aef6410ed473 121-129
+  s_5376b8b5242d45::t_c3321596d9c68a 4,34-49,54-58,60-63
+  s_667907d9fef14e::t_742fc1c9f9161e 32,66,74-82,86-87
+  s_883ae0bed73afa::t_0c70ee750f36a6 31,102-115,117
+  s_667907d9fef14e::t_d1531e6cb21738 130
+  s_5376b8b5242d45::t_685be7110649f4 33,50-53,59,64
+  s_667907d9fef14e::t_bc07cbaf55db42 65,67-73,83-85
+  s_667907d9fef14e::t_c16dafe9781559 116
+  s_6c87c7c2f9bd5d::t_12cd0833b797d6 1-3,5-30,88-101,118-120,131-136
+backend/internal/service/upstream_response_model.go
+  s_5376b8b5242d45::t_fafa293b1e6d31 39-40,74,196
+frontend/src/components/admin/usage/UsageTable.vue
+  s_5376b8b5242d45::t_e954f39f7ffbc3 90,588-589,620
+backend/internal/handler/gateway_handler.go
+  s_6c87c7c2f9bd5d::t_33f2bee2df2d34 210
+backend/internal/handler/admin/xiu_usage_downgrade_handler.go
+  s_5376b8b5242d45::t_4665c1b4f4c1a1 1-3,5-7,9-11,13,15,22,25-26,28-33
+  s_5376b8b5242d45::t_f3d7610eccf4aa 4,8,12,14,16-21,23-24,27
+backend/migrations/xiu_002_drop_account_cost_totals.sql
+  s_6c87c7c2f9bd5d::t_7d2f17161426ff 1-9
+xiu/allowed-touchpoints.txt
+  s_667907d9fef14e::t_bc07cbaf55db42 23-25
+  s_5376b8b5242d45::t_c3321596d9c68a 26-31
+  s_667907d9fef14e::t_742fc1c9f9161e 22
+  s_667907d9fef14e::t_d1531e6cb21738 21
+  s_6c87c7c2f9bd5d::t_ba739d92925ef2 1-16
+  s_883ae0bed73afa::t_8694a9fbcc608b 17-20
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "da6863ee70d4eecac61cd26edf3796965e92c098",
+  "prompts": {},
+  "sessions": {
+    "s_5376b8b5242d45": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ca5e93a8-04a8-4d94-9439-9af03f9b3d57",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    },
+    "s_667907d9fef14e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e06a66f8-cf90-4ca4-9ddd-7f675f7a111b",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    },
+    "s_6c87c7c2f9bd5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cb6ac44-dc5f-4c0f-af52-816912b716bc",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    },
+    "s_883ae0bed73afa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9239772-58ff-48de-aae8-b0e15d8c99c3",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": null
+    }
+  }
+}
