@@ -1,0 +1,183 @@
+backend/internal/service/xiu_openai_images_transport_failover_test.go
+  s_883ae0bed73afa::t_930704326df983 1-86
+backend/internal/service/upstream_response_model.go
+  s_5376b8b5242d45::t_fafa293b1e6d31 39-40,74,196
+backend/internal/service/xiu_cache_breakpoints_test.go
+  s_d82dcab92c28f8::t_5bfd02765df252 1-16,20-23,25-26,28-29,34-47,49-50,58-59,61-64,66-67
+  s_d82dcab92c28f8::t_582dc55eb08e95 48,51-57
+  s_d82dcab92c28f8::t_1583a505b7e251 17-18,24,27,30-33,74
+  s_d82dcab92c28f8::t_14ef8816d54c0a 19,60,65,68-73
+  s_d82dcab92c28f8::t_7c7c5148e01008 75
+xiu/allowed-touchpoints.txt
+  s_5376b8b5242d45::t_c3321596d9c68a 26,41-45
+  s_6c87c7c2f9bd5d::t_ba739d92925ef2 1-16
+  s_667907d9fef14e::t_d1531e6cb21738 21
+  s_667907d9fef14e::t_bc07cbaf55db42 23-25
+  s_d82dcab92c28f8::t_8ef72af3672df0 27-30
+  s_d82dcab92c28f8::t_f4187fdd6a9c90 31-40
+  s_883ae0bed73afa::t_8694a9fbcc608b 17-20
+  s_667907d9fef14e::t_742fc1c9f9161e 22
+backend/internal/service/xiu_cache_breakpoints.go
+  s_d82dcab92c28f8::t_5bfd02765df252 1-11,14-19,26-39,45-46,50,55,57-58,60-61,72
+  s_d82dcab92c28f8::t_1583a505b7e251 12-13
+  s_d82dcab92c28f8::t_582dc55eb08e95 20-25,62-71
+  s_d82dcab92c28f8::t_14ef8816d54c0a 40-44,47-49,51-54,56,59
+backend/internal/service/gateway_forward.go
+  s_667907d9fef14e::t_44f94eff651220 102
+  s_d82dcab92c28f8::t_5bfd02765df252 251-254
+backend/internal/service/openai_gateway_usage.go
+  s_5376b8b5242d45::t_fcb1613b7c6dcf 408
+xiu/check-touchpoints.sh
+  s_6c87c7c2f9bd5d::t_a3f0d9a8605673 1-76
+backend/internal/service/gateway_count_tokens.go
+  s_667907d9fef14e::t_44f94eff651220 31
+backend/internal/service/xiu_usage_downgrade.go
+  s_5376b8b5242d45::t_b17dcf1f342d66 272-274
+  s_5376b8b5242d45::t_46754d6b4b2975 17-18,60,432-436
+  s_5376b8b5242d45::t_f3d7610eccf4aa 20-22,27,38,52-54,75,77-82,447-448,451-455,468-474,477-482,484-511,513
+  s_5376b8b5242d45::t_70796de927341c 1-16,19,23-26,28-37,39-51,55-59,61-74,76,83-271,275-423,427-431,437-446,449-450,456-467,475-476,483,512,514
+  s_5376b8b5242d45::t_fcb1613b7c6dcf 424-426
+backend/internal/service/gateway_anthropic_apikey_passthrough_test.go
+  s_667907d9fef14e::t_91c4e84570d229 1775
+backend/internal/service/gateway_forward_as_chat_completions.go
+  s_d82dcab92c28f8::t_784d287ee44e42 111-114
+backend/internal/server/routes/admin.go
+  s_5376b8b5242d45::t_f3d7610eccf4aa 707
+backend/internal/service/model_rate_limit.go
+  s_6c87c7c2f9bd5d::t_7a76301f604558 93
+backend/internal/service/xiu_long_context_test.go
+  s_6c87c7c2f9bd5d::t_2fe8e0b043de63 1-152
+backend/internal/service/xiu_opus55_thinking_test.go
+  s_667907d9fef14e::t_91c4e84570d229 14,28,37-38,52,57-96,98-104
+  s_667907d9fef14e::t_899c214208aac7 1-13,15-27,29-36,39-51,53-56,97,105
+backend/internal/service/gateway_forward_as_chat_completions_test.go
+  s_d82dcab92c28f8::t_8ab7269d30a898 6,15,18,253-315
+backend/internal/handler/gateway_handler.go
+  s_6c87c7c2f9bd5d::t_33f2bee2df2d34 210
+frontend/src/components/admin/usage/UsageTable.vue
+  s_5376b8b5242d45::t_e954f39f7ffbc3 90,588-589,620
+backend/internal/service/openai_gateway_chat_completions_anthropic_native.go
+  s_d82dcab92c28f8::t_918224e9238ba4 101-104
+backend/internal/service/gateway_messages_cache.go
+  s_d82dcab92c28f8::t_55572e57e1165a 7,110-137,165-168,190-205
+backend/internal/service/ratelimit_service.go
+  s_6c87c7c2f9bd5d::t_e2df5a335143c7 374-377
+backend/internal/service/gateway_responses_cache_breakpoints_test.go
+  s_d82dcab92c28f8::t_677ad85609b127 1-142
+backend/internal/service/gateway_service.go
+  s_d82dcab92c28f8::t_5bfd02765df252 914-917
+backend/migrations/xiu_002_drop_account_cost_totals.sql
+  s_6c87c7c2f9bd5d::t_7d2f17161426ff 1-9
+backend/internal/service/gateway_forward_as_responses.go
+  s_d82dcab92c28f8::t_f279903a9326bd 121-124
+backend/internal/service/xiu_usage_downgrade_test.go
+  s_5376b8b5242d45::t_4cc182c9997b27 1-10,12,14-164,168-169,171,175,178,184,189,192,198,213
+  s_5376b8b5242d45::t_d394125291880c 11,13,165-167,170,172-174,176-177,179-183,186,188,201-204,207-212
+  s_5376b8b5242d45::t_fcb1613b7c6dcf 185,187
+  s_5376b8b5242d45::t_46754d6b4b2975 190-191,193-197,199-200,205-206
+backend/internal/handler/admin/xiu_usage_downgrade_handler.go
+  s_5376b8b5242d45::t_f3d7610eccf4aa 4,8,12,14,16-21,23-24,27
+  s_5376b8b5242d45::t_4665c1b4f4c1a1 1-3,5-7,9-11,13,15,22,25-26,28-33
+backend/internal/service/xiu_opus55_thinking.go
+  s_667907d9fef14e::t_d089b59cf56681 9-10,12-19,24-34,36-46
+  s_667907d9fef14e::t_ed9a6d1097526a 1-8,11,20-23,35,47-49
+backend/migrations/xiu_001_account_cost_totals.sql
+  s_6c87c7c2f9bd5d::t_0763ad329d9357 1-73
+backend/internal/repository/xiu_usage_downgrade_repo.go
+  s_5376b8b5242d45::t_ca98d46fbb183f 1-2,5,7,9
+  s_5376b8b5242d45::t_f3d7610eccf4aa 3-4,6,8,10
+backend/internal/service/xiu_session_anchor_test.go
+  s_d82dcab92c28f8::t_5bfd02765df252 1-47,49-51,56,77
+  s_d82dcab92c28f8::t_8ef72af3672df0 48
+  s_d82dcab92c28f8::t_1583a505b7e251 55,59,68-76
+  s_d82dcab92c28f8::t_015f06fdb42846 52-54,57-58,60-67
+PATCHES.md
+  s_d82dcab92c28f8::t_8ef72af3672df0 4,33-34,69-77,79,84-93,96,98-100
+  s_d82dcab92c28f8::t_14ef8816d54c0a 94
+  s_d82dcab92c28f8::t_b2a0ee8655d963 223-224
+  s_6c87c7c2f9bd5d::t_12cd0833b797d6 1-3,5-30,171-184,201-203,214-219
+  s_d82dcab92c28f8::t_582dc55eb08e95 80-83,97,102-103
+  s_d82dcab92c28f8::t_f4187fdd6a9c90 35,104-147
+  s_d82dcab92c28f8::t_670befa5db5463 148
+  s_d82dcab92c28f8::t_8cdd1fb3b1ffae 101
+  s_883ae0bed73afa::t_0c70ee750f36a6 31,185-198,200
+  s_6c87c7c2f9bd5d::t_abedf5446fc463 220-222
+  s_667907d9fef14e::t_742fc1c9f9161e 32,149,157-165,169-170
+  s_667907d9fef14e::t_d1531e6cb21738 213
+  s_d82dcab92c28f8::t_d4ce30c9f0f51e 78,95
+  s_667907d9fef14e::t_04aef6410ed473 204-212
+  s_5376b8b5242d45::t_685be7110649f4 36,53-56,62,67
+  s_667907d9fef14e::t_c16dafe9781559 199
+  s_5376b8b5242d45::t_c3321596d9c68a 37-52,57-61,63-66
+  s_667907d9fef14e::t_bc07cbaf55db42 68,150-156,166-168
+frontend/src/composables/xiu_useUsageDowngrades.ts
+  s_5376b8b5242d45::t_efbbb1f9f15c6e 4-6,25-31,42,47,52-53
+  s_5376b8b5242d45::t_ccf866dc9ebacf 34-37
+  s_5376b8b5242d45::t_d55e3a9db2e48b 40-41,43-45,60
+  s_5376b8b5242d45::t_e954f39f7ffbc3 1-3,7-24,32-33,38-39,46,48-51,54-59,61-64
+backend/internal/service/xiu_session_anchor.go
+  s_d82dcab92c28f8::t_1583a505b7e251 4,29-32,35-36,38-41,43-44,48-49,52-57,60,71-73,75-81,83-84,86
+  s_d82dcab92c28f8::t_e9183680230ba6 47
+  s_d82dcab92c28f8::t_582dc55eb08e95 21-24,37,42,50-51
+  s_d82dcab92c28f8::t_5bfd02765df252 1-3,5-20,25-28,33-34,45-46,58-59,61-70,74,82,85,87
+backend/internal/handler/xiu_openai_images_transport_failover_test.go
+  s_883ae0bed73afa::t_41779cb5959837 1-109
+backend/internal/service/openai_gateway_responses_anthropic_native.go
+  s_d82dcab92c28f8::t_34f30d21763cdb 103-105
+backend/internal/service/openai_images_responses.go
+  s_883ae0bed73afa::t_108760477ae12c 1865-1867
+frontend/src/components/admin/usage/xiu_DowngradeBadge.vue
+  s_5376b8b5242d45::t_e954f39f7ffbc3 1-61
+backend/internal/service/openai_images.go
+  s_883ae0bed73afa::t_2ac154eef3a3b0 678-680
+backend/internal/service/xiu_long_context.go
+  s_6c87c7c2f9bd5d::t_bcba61d683be69 1-205
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "3ade589aa834cb9263f1f48ce848c36e61961881",
+  "prompts": {},
+  "sessions": {
+    "s_5376b8b5242d45": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "ca5e93a8-04a8-4d94-9439-9af03f9b3d57",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    },
+    "s_667907d9fef14e": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "e06a66f8-cf90-4ca4-9ddd-7f675f7a111b",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    },
+    "s_6c87c7c2f9bd5d": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "8cb6ac44-dc5f-4c0f-af52-816912b716bc",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    },
+    "s_883ae0bed73afa": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "f9239772-58ff-48de-aae8-b0e15d8c99c3",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": null
+    },
+    "s_d82dcab92c28f8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "244f1afc-2f65-43d6-b3b6-b7245302572e",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": null
+    }
+  }
+}
