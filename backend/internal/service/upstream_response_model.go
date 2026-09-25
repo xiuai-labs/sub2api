@@ -36,6 +36,8 @@ type upstreamResponseModelObserver struct {
 	firstTier         string
 	firstTierConflict bool
 	terminalTier      string
+
+	xiuRequestID string // xiu: 降智标记，见 xiu_usage_downgrade.go
 }
 
 func (o *upstreamResponseModelObserver) Observe(model string, terminal bool) {
@@ -69,6 +71,7 @@ func normalizeObservedUpstreamResponseModel(model string) string {
 }
 
 func (o *upstreamResponseModelObserver) ObserveOpenAI(payload []byte, eventType string) {
+	o.xiuObserveDowngradeEvent(payload) // xiu: 降智标记
 	model := firstValidTrimmedGJSONString(payload, "response.model", "model")
 	terminal := isUpstreamResponseModelTerminalEvent(eventType)
 	o.Observe(model, terminal)
@@ -190,6 +193,7 @@ func beginUpstreamResponseModelObservation(c *gin.Context) *upstreamResponseMode
 	if c != nil {
 		c.Set(upstreamResponseModelObserverContextKey, observer)
 	}
+	xiuBindDowngradeObserver(c, observer) // xiu: 降智标记
 	return observer
 }
 

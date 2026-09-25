@@ -1,0 +1,41 @@
+# Upstream files this fork edits. One line per path, `#` starts a comment.
+#
+# The gate (check-touchpoints.sh) reads this in BOTH directions: an undeclared edit fails,
+# and so does a declared-but-unmodified entry. Declare a file when the change lands, never
+# before — an entry with no diff behind it is a standing permission nobody reviewed.
+#
+# Every entry here is merge risk we pay for on each upstream rebase, so the list should
+# shrink, not grow. Each one needs a row in PATCHES.md saying why it cannot live in xiu/.
+
+# 新增文件，刻意放在仓库根 —— 补丁台账要让人在读任何代码之前先看见。
+PATCHES.md
+
+# ── 长上下文缺 credits 不封整号：429 分类 / 调度 key / 进门估长度，各一处挂载（见 PATCHES.md）──
+backend/internal/handler/gateway_handler.go
+backend/internal/service/model_rate_limit.go
+backend/internal/service/ratelimit_service.go
+
+# ── 生图传输层错误走 failover：两个转发点各换成一次 helper 调用（见 PATCHES.md）──
+backend/internal/service/openai_images.go
+backend/internal/service/openai_images_responses.go
+
+# ── Opus 5.5 thinking=enabled/disabled 改写：两个入口各挂一行 + 删两个相反的上游用例（见 PATCHES.md）──
+backend/internal/service/gateway_forward.go
+backend/internal/service/gateway_count_tokens.go
+backend/internal/service/gateway_anthropic_apikey_passthrough_test.go
+
+# ── 上游 #7594 提前合入：Responses / Chat Completions 出口的缓存断点，两个 commit 原样 cherry-pick，
+#    刻意沿用上游文件名（含新增的测试文件），上游收编后随 rebase 自动消掉（见 PATCHES.md）──
+backend/internal/service/gateway_forward_as_chat_completions.go
+backend/internal/service/gateway_forward_as_chat_completions_test.go
+backend/internal/service/gateway_forward_as_responses.go
+backend/internal/service/gateway_messages_cache.go
+backend/internal/service/gateway_responses_cache_breakpoints_test.go
+backend/internal/service/openai_gateway_chat_completions_anthropic_native.go
+backend/internal/service/openai_gateway_responses_anthropic_native.go
+
+# ── 用量记录的降智标记（临时，打算丢弃）：观察器两处 + 记用量一处 + 路由一行 + 表格三行（见 PATCHES.md）──
+backend/internal/server/routes/admin.go
+backend/internal/service/openai_gateway_usage.go
+backend/internal/service/upstream_response_model.go
+frontend/src/components/admin/usage/UsageTable.vue
