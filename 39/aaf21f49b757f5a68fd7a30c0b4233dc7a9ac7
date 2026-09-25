@@ -1,0 +1,24 @@
+backend/internal/service/xiu_cache_breakpoints.go
+  s_d82dcab92c28f8::t_14ef8816d54c0a 34-38,41-43,45-48,50,53
+backend/internal/service/xiu_cache_breakpoints_test.go
+  s_d82dcab92c28f8::t_14ef8816d54c0a 19,45,50,53-59
+  s_d82dcab92c28f8::t_7c7c5148e01008 60
+PATCHES.md
+  s_d82dcab92c28f8::t_14ef8816d54c0a 94
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "39aaf21f49b757f5a68fd7a30c0b4233dc7a9ac7",
+  "prompts": {},
+  "sessions": {
+    "s_d82dcab92c28f8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "244f1afc-2f65-43d6-b3b6-b7245302572e",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    }
+  }
+}
