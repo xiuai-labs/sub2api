@@ -1,0 +1,22 @@
+PATCHES.md
+  s_d82dcab92c28f8::t_f4187fdd6a9c90 4,33,67-92
+  s_d82dcab92c28f8::t_670befa5db5463 93
+xiu/allowed-touchpoints.txt
+  s_d82dcab92c28f8::t_f4187fdd6a9c90 27-36
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "9f241c6bc847af0eaaa7986a2402902a4c08ee02",
+  "prompts": {},
+  "sessions": {
+    "s_d82dcab92c28f8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "244f1afc-2f65-43d6-b3b6-b7245302572e",
+        "model": "claude-fable-5-1"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    }
+  }
+}
