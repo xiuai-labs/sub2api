@@ -911,6 +911,10 @@ func (s *GatewayService) GenerateSessionHash(parsed *ParsedRequest) string {
 		)
 	}
 
+	// xiu: 会话锚点 —— 第二轮起随对话不变，见 PATCHES.md「会话锚点」
+	if anchored := s.xiuAnchoredSessionHash(parsed); anchored != "" {
+		return anchored
+	}
 	// 2. 提取带 cache_control: {type: "ephemeral"} 的内容
 	cacheableContent := s.extractCacheableContent(parsed)
 	if cacheableContent != "" {

@@ -99,6 +99,7 @@ func (s *GatewayService) Forward(ctx context.Context, c *gin.Context, account *A
 		validationModel = account.GetMappedModel(validationModel)
 	}
 	if account != nil && account.Platform == PlatformAnthropic && !account.IsBedrock() && account.Type != AccountTypeServiceAccount {
+		xiuNormalizeOpus55Thinking(parsed, validationModel) // xiu: enabled/disabled→上游收的形态，见 xiu_opus55_thinking.go
 		if err := validateClaudeOpus55Request(parsed.Body.Bytes(), validationModel); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"type": "error", "error": gin.H{"type": "invalid_request_error", "message": err.Error()}})
 			return nil, err
@@ -245,6 +246,10 @@ func (s *GatewayService) Forward(ctx context.Context, c *gin.Context, account *A
 		// 与 forward_as_chat_completions / forward_as_responses 路径对齐，
 		// 原生 /v1/messages 路径也走同一套可配置字段级改写。
 		if err := replaceBody(s.rewriteMessageCacheControlIfEnabled(ctx, body)); err != nil {
+			return nil, err
+		}
+		// xiu: 一个断点都没有的请求补 Parrot 式断点，见 PATCHES.md「补断点」
+		if err := replaceBody(xiuEnsureCacheBreakpoints(body)); err != nil {
 			return nil, err
 		}
 		if rw := buildToolNameRewriteFromBody(body); rw != nil {
