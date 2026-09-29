@@ -1,0 +1,89 @@
+backend/internal/handler/admin/xiu_usage_downgrade_handler.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-33
+backend/internal/service/xiu_claude55_thinking_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-97
+backend/internal/service/gateway_forward.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 108
+frontend/src/composables/xiu_useUsageDowngrades.ts
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-64
+backend/internal/service/xiu_long_context_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-152
+xiu/check-touchpoints.sh
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-76
+backend/internal/service/xiu_long_context.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-205
+backend/internal/service/model_rate_limit.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 93
+backend/internal/handler/gateway_handler.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 210
+PATCHES.md
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-209
+backend/internal/service/xiu_claude55_thinking.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-61
+backend/internal/service/gateway_count_tokens.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 37
+backend/internal/service/ratelimit_service.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 374-377
+backend/internal/repository/xiu_usage_downgrade_repo.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-10
+backend/internal/service/gateway_forward_as_chat_completions.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 110-113
+backend/internal/server/routes/admin.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 708
+backend/internal/service/upstream_response_model.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 39-40,74,196
+backend/migrations/xiu_002_drop_account_cost_totals.sql
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-9
+backend/internal/service/xiu_openai_images_transport_failover_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-86
+backend/internal/service/gateway_anthropic_apikey_passthrough_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1775
+backend/internal/service/openai_gateway_responses_anthropic_native.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 102-104
+backend/internal/service/xiu_usage_downgrade.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-514
+xiu/allowed-touchpoints.txt
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-77
+backend/internal/handler/xiu_openai_images_transport_failover_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-109
+backend/internal/service/openai_images_responses.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1865-1867
+backend/internal/service/gateway_messages_cache.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 7,110-137,165-168,190-204
+frontend/src/components/admin/usage/UsageTable.vue
+  s_041a6f1a4b99b6::t_c4743f9a028baa 90,588-589,620
+backend/internal/service/openai_images.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 678-680
+backend/internal/service/xiu_usage_downgrade_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-213
+backend/internal/service/openai_gateway_chat_completions_anthropic_native.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 100-103
+backend/internal/service/gateway_forward_as_chat_completions_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 6,15,18,253-314
+backend/internal/service/openai_gateway_usage.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 410
+backend/internal/service/gateway_forward_as_responses.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 121-124
+backend/internal/service/gateway_responses_cache_breakpoints_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-142
+backend/migrations/xiu_001_account_cost_totals.sql
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-73
+frontend/src/components/admin/usage/xiu_DowngradeBadge.vue
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-61
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "9426f6220ecdf62025cf19fa410e6c4315f22a83",
+  "prompts": {},
+  "sessions": {
+    "s_041a6f1a4b99b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9dcfc606-3fd3-4dad-b291-4577100a4ea9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    }
+  }
+}
