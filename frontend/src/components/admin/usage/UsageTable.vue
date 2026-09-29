@@ -87,6 +87,7 @@
                 {{ isLikelyModelVariant(row) ? t('usage.modelVariant') : t('usage.modelMismatch') }}
               </span>
             </div>
+            <div v-if="xiuDowngrades[row.id]" class="pl-3"><XiuDowngradeBadge :report="xiuDowngrades[row.id]" /></div><!-- xiu: 降智标记 -->
           </div>
         </template>
 
@@ -584,6 +585,8 @@ import IpGeoCell from '@/components/common/IpGeoCell.vue'
 import Icon from '@/components/icons/Icon.vue'
 import { fetchBatch, getEntry } from '@/utils/ipGeoLookup'
 import type { AdminUsageLog } from '@/types'
+import XiuDowngradeBadge from './xiu_DowngradeBadge.vue' // xiu: 降智标记
+import { useXiuUsageDowngrades } from '@/composables/xiu_useUsageDowngrades' // xiu: 降智标记
 import type { Column } from '@/components/common/types'
 
 interface Props {
@@ -614,6 +617,7 @@ const emit = defineEmits<{
   ipGeoBatchFailed: []
 }>()
 const { t } = useI18n()
+const xiuDowngrades = useXiuUsageDowngrades(() => props.data) // xiu: 降智标记
 const appStore = useAppStore()
 const copiedRequestId = ref<string | null>(null)
 const showAccountBilling = props.showAccountBilling

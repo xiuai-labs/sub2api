@@ -66,7 +66,7 @@ func (s *OpenAIGatewayService) forwardChatCompletionsViaNativeAnthropic(
 	// Resolve the mapped model before choosing its thinking/tool protocol.
 	billingModel := resolveOpenAIForwardModel(account, originalModel, defaultMappedModel)
 	upstreamModel := normalizeOpenAIModelForUpstream(account, billingModel)
-	if err := validateClaudeOpus55Request(body, upstreamModel); err != nil {
+	if err := validateClaude55Request(body, upstreamModel); err != nil {
 		writeChatCompletionsError(c, http.StatusBadRequest, "invalid_request_error", err.Error())
 		return nil, err
 	}
@@ -98,6 +98,10 @@ func (s *OpenAIGatewayService) forwardChatCompletionsViaNativeAnthropic(
 	// 与 /v1/messages 直通路径相同的 pre-filter。
 	anthropicBody = StripEmptyTextBlocks(anthropicBody)
 	anthropicBody = FilterWebSearchHistoryBlocks(anthropicBody, upstreamModel)
+	// CC 客户端不带 cache_control，且 CC→Responses→Anthropic 转换也不会补断点，
+	// 与 Anthropic 平台的 gateway_forward_as_chat_completions.go 一样注入随对话
+	// 前进的断点，否则上游每轮只有 cache_read，新增长的内容永远不写缓存。
+	anthropicBody = applyResponsesAnthropicCacheBreakpoints(anthropicBody, upstreamModel)
 	anthropicBody = enforceCacheControlLimit(anthropicBody)
 
 	apiKey := strings.TrimSpace(account.GetOpenAIProtocolAPIKey())

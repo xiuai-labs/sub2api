@@ -20,7 +20,6 @@ import (
 	"time"
 
 	"github.com/Wei-Shaw/sub2api/internal/pkg/apicompat"
-	"github.com/Wei-Shaw/sub2api/internal/pkg/claude"
 	"github.com/Wei-Shaw/sub2api/internal/pkg/logger"
 	"github.com/Wei-Shaw/sub2api/internal/util/responseheaders"
 	"github.com/gin-gonic/gin"
@@ -68,7 +67,7 @@ func (s *OpenAIGatewayService) forwardResponsesViaNativeAnthropic(
 	// Resolve the mapped model before choosing its thinking/tool protocol.
 	billingModel := resolveOpenAIForwardModel(account, originalModel, defaultMappedModel)
 	upstreamModel := normalizeOpenAIModelForUpstream(account, billingModel)
-	if err := validateClaudeOpus55Request(body, upstreamModel); err != nil {
+	if err := validateClaude55Request(body, upstreamModel); err != nil {
 		writeResponsesError(c, http.StatusBadRequest, "invalid_request_error", err.Error())
 		return nil, err
 	}
@@ -100,6 +99,9 @@ func (s *OpenAIGatewayService) forwardResponsesViaNativeAnthropic(
 	// 与 /v1/messages 直通路径相同的 pre-filter。
 	anthropicBody = StripEmptyTextBlocks(anthropicBody)
 	anthropicBody = FilterWebSearchHistoryBlocks(anthropicBody, upstreamModel)
+	// Responses 客户端不带 cache_control：补上随对话前进的断点，否则缓存只会在
+	// 上游 tools 固定前缀上写一次，后续轮次的新增内容永远不写入缓存。
+	anthropicBody = applyResponsesAnthropicCacheBreakpoints(anthropicBody, upstreamModel)
 	anthropicBody = enforceCacheControlLimit(anthropicBody)
 
 	apiKey := strings.TrimSpace(account.GetOpenAIProtocolAPIKey())
@@ -272,7 +274,7 @@ func (s *OpenAIGatewayService) handleResponsesBufferedFromNativeAnthropic(
 		}
 	}
 
-	if claude.IsOpus55(upstreamModel) {
+	if isClaude55SignedThinkingModel(upstreamModel) {
 		finalResp.Model = upstreamModel
 	}
 	responsesResp := apicompat.AnthropicToResponsesResponse(finalResp)
@@ -333,7 +335,7 @@ func (s *OpenAIGatewayService) handleResponsesStreamingFromNativeAnthropic(
 
 	state := apicompat.NewAnthropicEventToResponsesState()
 	state.Model = originalModel
-	state.PreserveThinkingSignatures = claude.IsOpus55(upstreamModel)
+	state.PreserveThinkingSignatures = isClaude55SignedThinkingModel(upstreamModel)
 	clientToolRestorer := apicompat.NewResponsesClientToolStreamRestorer(clientToolMapping)
 
 	var usage ClaudeUsage
