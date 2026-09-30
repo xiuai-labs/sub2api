@@ -67,6 +67,7 @@ func (s *OpenAIGatewayService) forwardResponsesViaNativeAnthropic(
 	// Resolve the mapped model before choosing its thinking/tool protocol.
 	billingModel := resolveOpenAIForwardModel(account, originalModel, defaultMappedModel)
 	upstreamModel := normalizeOpenAIModelForUpstream(account, billingModel)
+	body, responsesReq = xiuNormalizeClaudeCompatRequest(body, responsesReq, upstreamModel) // xiu: OpenAI 协议入口剥采样参数 / 映射 none effort
 	if err := validateClaude55Request(body, upstreamModel); err != nil {
 		writeResponsesError(c, http.StatusBadRequest, "invalid_request_error", err.Error())
 		return nil, err
@@ -99,6 +100,9 @@ func (s *OpenAIGatewayService) forwardResponsesViaNativeAnthropic(
 	// 与 /v1/messages 直通路径相同的 pre-filter。
 	anthropicBody = StripEmptyTextBlocks(anthropicBody)
 	anthropicBody = FilterWebSearchHistoryBlocks(anthropicBody, upstreamModel)
+	// Responses 客户端不带 cache_control：补上随对话前进的断点，否则缓存只会在
+	// 上游 tools 固定前缀上写一次，后续轮次的新增内容永远不写入缓存。
+	anthropicBody = applyResponsesAnthropicCacheBreakpoints(anthropicBody, upstreamModel)
 	anthropicBody = enforceCacheControlLimit(anthropicBody)
 
 	apiKey := strings.TrimSpace(account.GetOpenAIProtocolAPIKey())

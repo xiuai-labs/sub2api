@@ -558,7 +558,8 @@ func (s *GatewayService) computeFinalAnthropicBeta(
 					incomingBetas = append(incomingBetas, token)
 				}
 			}
-			return mergeAnthropicBetaDropping(claude.FullClaudeCodeMimicryBetas(), strings.Join(incomingBetas, ","), effectiveDropSet), true
+			incomingBeta := xiuMimicThinkingDisplayBeta(strings.Join(incomingBetas, ","), body) // xiu: display=updates 的 beta
+			return mergeAnthropicBetaDropping(claude.FullClaudeCodeMimicryBetas(), incomingBeta, effectiveDropSet), true
 		}
 		// 真 Claude Code 客户端透传路径
 		return stripBetaTokensWithSet(s.getBetaHeader(modelID, clientBeta), effectiveDropSet), true

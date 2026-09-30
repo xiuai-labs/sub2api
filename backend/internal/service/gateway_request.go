@@ -1043,6 +1043,9 @@ func sanitizeAnthropicBodyForBetaTokens(body []byte, anthropicBetaHeader string)
 	if b, deleted := stripAnthropicMessageOutputConfigUnlessBeta(body, anthropicBetaHeader); deleted {
 		body, changed = b, true
 	}
+	if b, downgraded := xiuDowngradeThinkingDisplayUnlessBeta(body, anthropicBetaHeader); downgraded { // xiu: display=updates 缺 beta 降级
+		body, changed = b, true
+	}
 
 	return body, changed
 }
