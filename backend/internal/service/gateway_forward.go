@@ -105,6 +105,7 @@ func (s *GatewayService) Forward(ctx context.Context, c *gin.Context, account *A
 		}
 	}
 	if account != nil && account.Platform == PlatformAnthropic {
+		xiuNormalizeClaude55Thinking(parsed, validationModel) // xiu: enabled/disabled→上游收的形态，见 xiu_claude55_thinking.go
 		if err := validateClaude55Request(parsed.Body.Bytes(), validationModel); err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"type": "error", "error": gin.H{"type": "invalid_request_error", "message": err.Error()}})
 			return nil, err
@@ -825,7 +826,7 @@ func (s *GatewayService) Forward(ctx context.Context, c *gin.Context, account *A
 			if errors.As(err, &sseErr) {
 				// 上游 HTTP 200 + SSE 流体内出现 event:error 帧。
 				body := []byte(sseErr.RawData)
-				semanticStatus := http.StatusForbidden
+				semanticStatus := xiuSSEErrorStatus(body) // xiu: 按 error.type 还原，不再一律 403
 				if c.Writer.Size() == writerSizeBeforeStream && gjson.GetBytes(body, "error.type").String() == "overloaded_error" {
 					semanticStatus = 529
 					syntheticResp := &http.Response{

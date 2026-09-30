@@ -296,7 +296,7 @@ func TestGatewayService_Forward_PostOutputSSEOverloadedErrorKeepsExistingStatus(
 
 	var failoverErr *UpstreamFailoverError
 	require.ErrorAs(t, err, &failoverErr)
-	require.Equal(t, http.StatusForbidden, failoverErr.StatusCode)
+	require.Equal(t, 529, failoverErr.StatusCode) // xiu: 原断言 403，见 xiu_sse_error_status.go
 	require.JSONEq(t, errorJSON, string(failoverErr.ResponseBody))
 	require.Zero(t, repo.tempCalls)
 	require.Contains(t, rec.Body.String(), "message_start")

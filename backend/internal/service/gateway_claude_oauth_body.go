@@ -272,6 +272,7 @@ func normalizeClaudeOAuthRequestBody(body []byte, modelID string, opts claudeOAu
 			out = next
 			modified = true
 		}
+		out, modified = xiuDropTopPAfterTemperatureFill(out, modified) // xiu: 补了 temperature 就丢 top_p（二选一），见 PATCHES.md
 	}
 
 	// max_tokens：真实 CLI 的默认值是 128000。缺失时补齐以对齐指纹。
