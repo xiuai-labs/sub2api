@@ -1,0 +1,178 @@
+frontend/src/components/admin/usage/xiu_DowngradeBadge.vue
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-61
+backend/internal/service/model_rate_limit.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 93
+frontend/src/components/admin/usage/UsageTable.vue
+  s_041a6f1a4b99b6::t_c4743f9a028baa 90,588-589,620
+backend/internal/service/gateway_forward_as_chat_completions_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 6,15,18,253-314
+  s_041a6f1a4b99b6::t_e98ef5bd2739af 315
+backend/internal/service/gateway_count_tokens.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 37
+backend/internal/service/ratelimit_service.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 374-377
+backend/internal/handler/xiu_openai_images_transport_failover_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-109
+backend/migrations/xiu_001_account_cost_totals.sql
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-73
+backend/internal/handler/gateway_handler.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 210
+backend/internal/handler/admin/xiu_usage_downgrade_handler.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-33
+backend/internal/service/xiu_usage_downgrade_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-213
+backend/internal/service/openai_gateway_chat_completions_anthropic_native.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 100-103
+backend/internal/service/upstream_response_model.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 39-40,74,196
+backend/internal/service/xiu_long_context.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-205
+backend/internal/service/gateway_responses_cache_breakpoints_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-142
+backend/internal/repository/xiu_usage_downgrade_repo.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-10
+xiu/check-touchpoints.sh
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-76
+backend/internal/service/gateway_forward_as_chat_completions.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 110-113
+backend/internal/service/openai_gateway_usage.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 410
+backend/internal/service/openai_images.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 678-680
+backend/internal/service/gateway_messages_cache.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 7,110-137,165-168,190-204
+  s_041a6f1a4b99b6::t_7ee2f1bd6bba7b 205
+backend/internal/service/xiu_claude55_thinking_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-97
+backend/internal/service/xiu_usage_downgrade.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-514
+backend/internal/service/xiu_claude55_thinking.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-61
+xiu/allowed-touchpoints.txt
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-41
+  s_e5c5c796ec1729::t_f9039654d5eb6c 42-82
+backend/migrations/xiu_002_drop_account_cost_totals.sql
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-9
+backend/internal/service/xiu_openai_images_transport_failover_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-86
+backend/internal/service/openai_gateway_responses_anthropic_native.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 102-104
+backend/internal/service/openai_images_responses.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1865-1867
+frontend/src/composables/xiu_useUsageDowngrades.ts
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-64
+backend/internal/server/routes/admin.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 708
+PATCHES.md
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-3,5-73,75-132,134-170,172-174,181-197
+  s_041a6f1a4b99b6::t_e05eb7d5fe1fef 4,74,133,171,175-180
+  s_e5c5c796ec1729::t_6f495d42a5ebfd 198-213
+backend/internal/service/gateway_forward.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 108
+backend/internal/service/gateway_forward_as_responses.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 121-124
+backend/internal/service/xiu_long_context_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-152
+backend/internal/service/gateway_anthropic_apikey_passthrough_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1775
+backend/internal/handler/gateway_models_test.go
+  s_e5c5c796ec1729::t_bddf050f623816 1502,1504
+backend/internal/pkg/apicompat/anthropic_responses_test.go
+  s_e5c5c796ec1729::t_cd1107cb69ebb3 1982-1994
+backend/internal/pkg/apicompat/anthropic_to_responses.go
+  s_e5c5c796ec1729::t_d9797005960ed4 16-18,65-67
+backend/internal/pkg/apicompat/chatcompletions_to_responses.go
+  s_e5c5c796ec1729::t_418740f2354232 21-23
+backend/internal/pkg/openai/codex_gpt61_sol.json
+  s_e5c5c796ec1729::t_0634daa02cdb70 1-177
+backend/internal/pkg/openai/constants.go
+  s_e5c5c796ec1729::t_f85f1671fac147 6-7,28,84-89,152-161,199-229
+backend/internal/pkg/openai/constants_test.go
+  s_e5c5c796ec1729::t_f787e7e707d24a 45-63
+backend/internal/service/billing_service.go
+  s_e5c5c796ec1729::t_30b046f8fda197 99-100,158-160,558-571,1190,1349,1867,1876-1878,1893,1905
+backend/internal/service/billing_service_test.go
+  s_e5c5c796ec1729::t_4d028abbf6947a 1985,2049,2087,2089,2093-2143
+backend/internal/service/openai_codex_model_metadata.go
+  s_e5c5c796ec1729::t_9d0f5b8013ecd5 6,12,26-31,73,97-107
+backend/internal/service/openai_codex_models_service.go
+  s_e5c5c796ec1729::t_a8200f3a07c7e5 380,514,523,543-549,649,2073,2644-2682
+backend/internal/service/openai_codex_models_service_test.go
+  s_e5c5c796ec1729::t_2508444524527d 3771,3789-3853
+backend/internal/service/openai_codex_pat_service_test.go
+  s_e5c5c796ec1729::t_c47509ac018f49 124-133
+backend/internal/service/openai_codex_transform.go
+  s_e5c5c796ec1729::t_c2dff9c210231e 14,66
+backend/internal/service/openai_compat_model.go
+  s_e5c5c796ec1729::t_1d811882aa93e1 7,11-13,27-40
+backend/internal/service/openai_compat_prompt_cache_key.go
+  s_e5c5c796ec1729::t_042898216ca62e 19
+backend/internal/service/openai_compat_prompt_cache_key_test.go
+  s_e5c5c796ec1729::t_ee1d102516f97d 169,172
+backend/internal/service/openai_gateway_chat_completions.go
+  s_e5c5c796ec1729::t_c819eb5eed184b 208-211
+backend/internal/service/openai_gateway_chat_completions_raw.go
+  s_e5c5c796ec1729::t_33e9d34ac57005 77-80,88-92
+backend/internal/service/openai_gateway_chat_completions_test.go
+  s_e5c5c796ec1729::t_ef520488f90c0b 1216,1252-1334
+backend/internal/service/openai_gateway_messages.go
+  s_e5c5c796ec1729::t_ebc19fccd71330 99-102
+backend/internal/service/openai_gateway_messages_chat_fallback.go
+  s_e5c5c796ec1729::t_53797b3e73f9cb 13,63-71
+backend/internal/service/openai_gateway_request_body.go
+  s_e5c5c796ec1729::t_67c416155179ec 1336,2579-2601
+backend/internal/service/openai_gateway_responses_chat_fallback.go
+  s_e5c5c796ec1729::t_7665e4f63fd4f9 17,75-83
+backend/internal/service/openai_model_alias.go
+  s_e5c5c796ec1729::t_fa2fde6497ed1f 40-42,166
+backend/internal/service/pricing_service.go
+  s_e5c5c796ec1729::t_d5ca2bf8539f30 77-93,1542-1547
+backend/internal/service/service_tier_billing.go
+  s_e5c5c796ec1729::t_257ce85e46626f 56-57
+backend/internal/service/service_tier_billing_test.go
+  s_e5c5c796ec1729::t_67b11f7275584f 19-23
+backend/resources/model-pricing/model_prices_and_context_window.json
+  s_e5c5c796ec1729::t_ae0a21f5f8ecc7 2-55
+frontend/src/components/account/__tests__/credentialsBuilder.spec.ts
+  s_e5c5c796ec1729::t_bdfc9dfad110d0 1,455-457,459,463-465,487-495,497-502,504-507,509-510,513-517,542-552
+frontend/src/components/account/credentialsBuilder.ts
+  s_e5c5c796ec1729::t_d04d45a6b55125 1,506,521,524,526-528,530
+frontend/src/components/common/PlatformTypeBadge.vue
+  s_e5c5c796ec1729::t_1dfdb463fffb97 121,262-263,269-270
+frontend/src/components/common/__tests__/PlatformTypeBadge.openaiPlans.spec.ts
+  s_e5c5c796ec1729::t_3d0c2d478d3b5b 22,26,31,35,37,41,44,73,75,81,86,91-108
+frontend/src/components/keys/UseKeyModal.vue
+  s_e5c5c796ec1729::t_e16d8cf62d84ad 1406-1422
+frontend/src/components/keys/__tests__/UseKeyModal.spec.ts
+  s_e5c5c796ec1729::t_90a8f6a87cbb82 709,715
+frontend/src/composables/__tests__/useModelWhitelist.spec.ts
+  s_e5c5c796ec1729::t_f94624a11c6edc 20,27
+frontend/src/composables/useModelWhitelist.ts
+  s_e5c5c796ec1729::t_8cb4a104aed99e 13,313
+frontend/src/utils/planType.ts
+  s_e5c5c796ec1729::t_a317d0ce34155d 1,6-28,30-41
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.4",
+  "base_commit_sha": "56532209dae7c04a46f84f1e84c6475603a767f9",
+  "prompts": {},
+  "sessions": {
+    "s_041a6f1a4b99b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9dcfc606-3fd3-4dad-b291-4577100a4ea9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    },
+    "s_e5c5c796ec1729": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b6f8773a-4232-4bc0-afb2-fbe414be8c55",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    }
+  }
+}
