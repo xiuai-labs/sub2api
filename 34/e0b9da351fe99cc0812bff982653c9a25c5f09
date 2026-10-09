@@ -1,0 +1,151 @@
+backend/internal/server/routes/admin.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 710
+backend/internal/service/gateway_responses_cache_breakpoints_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-142
+backend/internal/repository/xiu_usage_downgrade_repo.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-10
+backend/internal/service/gateway_upstream_request.go
+  s_394851071aa3e8::t_b64cf14947afb1 562
+  s_394851071aa3e8::t_2185fae8d5c232 561
+xiu/check-touchpoints.sh
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-76
+backend/internal/service/xiu_long_context.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-205
+backend/internal/service/gateway_forward_as_responses.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 122-125
+  s_64961f8a430603::t_0b9332c668abf1 79
+backend/internal/service/xiu_claude55_thinking.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-61
+backend/internal/service/xiu_usage_downgrade.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-514
+PATCHES.md
+  s_64961f8a430603::t_c99b5a1bc0c116 34,114-134,151
+  s_394851071aa3e8::t_b64cf14947afb1 76,211
+  s_45b528b0fd6c59::t_4bf1518d5f2e25 215-219
+  s_e5c5c796ec1729::t_6f495d42a5ebfd 227-242
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-3,5-33,36-74,77-113,152-156,158-194,196-198,205-210,212-214,220-226
+  s_64961f8a430603::t_f622640c51965c 4,35,135-150
+  s_041a6f1a4b99b6::t_e05eb7d5fe1fef 75,157,195,199-204
+xiu/allowed-touchpoints.txt
+  s_64961f8a430603::t_f622640c51965c 45-48
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-44
+backend/internal/service/xiu_openai_images_transport_failover_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-86
+backend/internal/service/ratelimit_service.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 374-377
+backend/internal/service/upstream_response_model.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 39-40,74,196
+backend/internal/service/gateway_anthropic_apikey_passthrough_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1775
+backend/internal/service/xiu_claude_compat_request_test.go
+  s_64961f8a430603::t_e52287ddc57c74 1-101
+backend/internal/service/gateway_messages_cache.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 7,110-137,165-168,190-204
+  s_041a6f1a4b99b6::t_7ee2f1bd6bba7b 205
+backend/internal/pkg/claude/xiu_strict_sampling.go
+  s_64961f8a430603::t_5fb7ad69b2e26e 1-25
+backend/internal/service/openai_gateway_usage.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 410
+backend/internal/service/openai_gateway_responses_anthropic_native.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 103-105
+  s_64961f8a430603::t_d8bd2ca662ad05 70
+backend/internal/handler/gateway_handler.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 211
+backend/internal/service/openai_images_responses.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1865-1867
+frontend/src/composables/xiu_useUsageDowngrades.ts
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-64
+backend/migrations/xiu_001_account_cost_totals.sql
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-73
+backend/internal/handler/admin/xiu_usage_downgrade_handler.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-33
+frontend/src/components/admin/usage/xiu_DowngradeBadge.vue
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-61
+backend/internal/service/model_rate_limit.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 93
+frontend/src/components/admin/usage/UsageTable.vue
+  s_041a6f1a4b99b6::t_c4743f9a028baa 90,592-593,624
+backend/internal/service/xiu_claude55_thinking_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-97
+backend/internal/service/xiu_thinking_display_updates_test.go
+  s_64961f8a430603::t_7280e02e7b269c 1-68,75-78,80-89,92-94
+  s_64961f8a430603::t_edac678d3ae468 69-74,79,90-91
+backend/internal/service/openai_images.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 678-680
+backend/internal/handler/xiu_openai_images_transport_failover_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-109
+backend/internal/service/gateway_forward_as_chat_completions_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 6,15,18,253-314
+  s_041a6f1a4b99b6::t_e98ef5bd2739af 315
+backend/internal/service/gateway_request.go
+  s_64961f8a430603::t_ea624ba2dbc866 1046-1048
+backend/internal/service/gateway_forward_as_chat_completions.go
+  s_64961f8a430603::t_b01b96effc2a60 68
+  s_041a6f1a4b99b6::t_c4743f9a028baa 111-114
+backend/internal/service/xiu_thinking_display_updates.go
+  s_64961f8a430603::t_98bb7d04a89080 1-3,6-16,18,22-38,40-53
+  s_64961f8a430603::t_edac678d3ae468 4-5,17,19-21,39
+backend/internal/service/xiu_usage_downgrade_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-213
+backend/internal/service/openai_gateway_chat_completions_anthropic_native.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 101-104
+  s_64961f8a430603::t_148d71cec87cb5 68
+backend/migrations/xiu_002_drop_account_cost_totals.sql
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-9
+backend/internal/service/gateway_forward.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 108
+backend/internal/service/xiu_claude_compat_request.go
+  s_64961f8a430603::t_743429e163422c 1-64
+backend/internal/service/gateway_count_tokens.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 37
+backend/internal/service/xiu_long_context_test.go
+  s_041a6f1a4b99b6::t_c4743f9a028baa 1-152
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.7.5",
+  "base_commit_sha": "34e0b9da351fe99cc0812bff982653c9a25c5f09",
+  "prompts": {},
+  "sessions": {
+    "s_041a6f1a4b99b6": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9dcfc606-3fd3-4dad-b291-4577100a4ea9",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    },
+    "s_394851071aa3e8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0546be95-0bd6-45e3-823c-9d7fd44e3e8c",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    },
+    "s_45b528b0fd6c59": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "a4bf3918-bb2d-4d60-b9e2-765f7dd5620c",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    },
+    "s_64961f8a430603": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "9d4d2eb8-7948-4d30-81f0-0fbaf053b169",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": null
+    },
+    "s_e5c5c796ec1729": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "b6f8773a-4232-4bc0-afb2-fbe414be8c55",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
+    }
+  }
+}
