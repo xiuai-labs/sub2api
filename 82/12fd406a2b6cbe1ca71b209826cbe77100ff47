@@ -21,6 +21,7 @@ PATCHES.md
   s_041a6f1a4b99b6::t_c4743f9a028baa 1-3,5-33,36-74,77-113,152-156,158-194,196-198,205-210,212-214,220-226
   s_e5c5c796ec1729::t_6f495d42a5ebfd 227-242
   s_64961f8a430603::t_c99b5a1bc0c116 34,114-134,151
+  s_394851071aa3e8::t_b64cf14947afb1 76,211
 backend/internal/service/xiu_thinking_display_updates.go
   s_64961f8a430603::t_98bb7d04a89080 1-3,6-16,18,22-38,40-53
   s_64961f8a430603::t_edac678d3ae468 4-5,17,19-21,39
@@ -96,6 +97,9 @@ backend/internal/service/xiu_claude_compat_request.go
   s_64961f8a430603::t_743429e163422c 1-64
 backend/internal/service/xiu_claude_compat_request_test.go
   s_64961f8a430603::t_e52287ddc57c74 1-101
+backend/internal/service/gateway_upstream_request.go
+  s_394851071aa3e8::t_2185fae8d5c232 561
+  s_394851071aa3e8::t_b64cf14947afb1 562
 ---
 {
   "schema_version": "authorship/3.0.0",
@@ -110,6 +114,14 @@ backend/internal/service/xiu_claude_compat_request_test.go
         "model": "claude-opus-5-5"
       },
       "human_author": null
+    },
+    "s_394851071aa3e8": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "0546be95-0bd6-45e3-823c-9d7fd44e3e8c",
+        "model": "claude-opus-5-5"
+      },
+      "human_author": "yk <sysuyangkang@gmail.com>"
     },
     "s_45b528b0fd6c59": {
       "agent_id": {
